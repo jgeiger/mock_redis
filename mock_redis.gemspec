@@ -22,9 +22,9 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.required_ruby_version = '>= 2.4'
+  s.add_runtime_dependency 'redis', '~> 4.1.0'
 
   s.add_development_dependency 'rake', '>= 10', '< 12'
-  s.add_development_dependency 'redis', '~>4.1.0'
   s.add_development_dependency 'rspec', '~> 3.0'
   s.add_development_dependency 'rspec-its', '~> 1.0'
   s.add_development_dependency 'timecop', '~> 0.9.1'
