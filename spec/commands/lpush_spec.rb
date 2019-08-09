@@ -33,6 +33,23 @@ describe '#lpush(key, value)' do
     @redises.lindex(@key, 2).should == '1'
   end
 
+  context 'allow indifferent keytype access' do
+    it 'returns the correct results for integer keys' do
+      @key = 1234
+      @redises.del(@key)
+      @redises.lpush(@key, 'abcd')
+      @redises.lrange(@key, 0, -1).should == ['abcd']
+      @redises.lrange(@key.to_s, 0, -1).should == ['abcd']
+    end
+
+    it 'returns the correct results for string keys' do
+      @key = '1234'
+      @redises.del(@key)
+      @redises.lpush(@key, 'abcd')
+      @redises.lrange(@key, 0, -1).should == ['abcd']
+    end
+  end
+
   it 'raises an error if an empty array is given' do
     lambda do
       @redises.lpush(@key, [])

@@ -83,6 +83,7 @@ class MockRedis
     end
 
     def lpush(key, values)
+      key = key.to_s
       values = [values] unless values.is_a?(Array)
       assert_has_args(values, 'lpush')
       with_list_at(key) { |l| values.each { |v| l.unshift(v.to_s) } }
@@ -100,6 +101,7 @@ class MockRedis
     end
 
     def lrange(key, start, stop)
+      key = key.to_s
       start = start.to_i
       with_list_at(key) { |l| start < l.size ? l[[start, -l.length].max..stop.to_i] : [] }
     end
